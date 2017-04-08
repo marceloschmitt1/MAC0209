@@ -52,5 +52,7 @@ def experimentParser(values,mru,mra,temp):
 
 """ Parse a line of accelerometer toolbox """
 def toolBoxParser(values,time,acc):
-    time.append(float(values[0]))
+    delay = 5
+
+    time.append(float(values[0])-delay)
     acc.append(float(values[4]))
