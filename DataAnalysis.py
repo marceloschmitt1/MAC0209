@@ -36,6 +36,8 @@ def analyzeMRU(mru, pt):
         plot.scatter(t, errors, color="red", label="Erro (posição)")
         plot.plot(t, analyticPositions, label="Posição (modelo)")
         plot.plot(pt[i][0], pt[i][1], color="cyan", label="Força (acelerômetro)")
+        plot.xlabel('segundos', fontsize=18)
+        plot.ylabel('metros', fontsize=16)
         plot.legend()
         plot.show()
         print("")
@@ -62,24 +64,30 @@ def analyzeMRA(mra, pt):
         vErrors = [abs(x - a) for (x,a) in zip(v, analyticVelocities)]
         print("Erros experimentais (velocidade):", vErrors)
         total += acceleration
-        n += 1
+        n += 1    
 
-        input("Aperte Enter para exibir o gráfico de s(t)")
-        plot.scatter(t, x, color="green", label="Posição (experimental)")
-        plot.scatter(t, errors, color="red", label="Erro (posição)")
-        plot.plot(times, analyticPositions, label="Posição (modelo)")
-        plot.plot(pt[i][0], pt[i][1], color="cyan", label="Força (acelerômetro)")
-        plot.legend()
+        input("Aperte Enter para exibir o gráfico de s(t) e v(t)")
+        f,plots = plot.subplots(2, sharex=True)
+        plots[0].scatter(t, x, color="green", label="Posição (experimental)")
+        plots[0].scatter(t, errors, color="red", label="Erro (posição)")
+        plots[0].plot(times, analyticPositions, label="Posição (modelo)")
+        plots[0].plot(pt[i][0], pt[i][1], color="cyan", label="Força (acelerômetro)")
+        plots[0].legend()
+        plots[0].set_xlabel('segundos', fontsize=12)
+        plots[0].set_ylabel('metros', fontsize=12)
+        
+        plots[1].scatter(t, v, color="green", label="Velocidade (experimental)")
+        plots[1].scatter(t, vErrors, color="red", label="Erro (velocidade)")
+        plots[1].plot(t, analyticVelocities, label="Velocidade (modelo)")
+        plots[1].plot(pt[i][0], pt[i][1], color="cyan", label="Força (acelerômetro)")
+        plots[1].legend()
+        plots[1].set_xlabel('segundos', fontsize=12)
+        plots[1].set_ylabel('m/s', fontsize=12)
+        
         plot.show()
-        input("Aperte Enter para exibir o gráfico de v(t)")
-        plot.scatter(t, v, color="green", label="Velocidade (experimental)")
-        plot.scatter(t, vErrors, color="red", label="Erro (velocidade)")
-        plot.plot(t, analyticVelocities, label="Velocidade (modelo)")
-        plot.plot(pt[i][0], pt[i][1], color="cyan", label="Força (acelerômetro)")
-        plot.legend()
-        plot.show()
-        print("")
+        
     print("Aceleração 'média' de todos os experimentos: ", total/n, "m/s^2")
+
 
 x = [0, 2, 4, 6]
 mru, mra = table.csvParser("data.csv")
