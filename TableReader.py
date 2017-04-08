@@ -1,7 +1,7 @@
 import numpy as np
 
 """Read a csv file of the first experiment then create
-   the numpy vectors for plotiing"""
+   the numpy vectors for plotting"""
 def csvParser(filename):
     mru = []
     mra = []
