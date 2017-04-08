@@ -58,8 +58,3 @@ def dotVector(v):
 def dotVectorShow(v):
     p,x = dotVector(v);
     plt.scatter(x,p)
- 
-if __name__ == '__main__':
-    noUniformShow(10,5,-1,10, 1)
-    dotVectorShow([2,5,7])
-    plt.show()
