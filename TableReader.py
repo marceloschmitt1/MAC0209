@@ -7,6 +7,7 @@ def csvParser(filename):
     mra = []
     time = []
     acc = []
+    flag = True
     
     f = open(filename, "r")
     for line in f:
@@ -16,7 +17,10 @@ def csvParser(filename):
             experimentParser(values,mru,mra,temp)           
         else:
             if len(values) == 5:
-                toolBoxParser(values, time, acc)
+                if (flag):
+                    flag = False
+                else:
+                    toolBoxParser(values, time, acc)
     
     if (len(mru) > 0 and len(mra) > 0):
         mru = np.asarray(mru)
@@ -48,5 +52,7 @@ def experimentParser(values,mru,mra,temp):
 
 """ Parse a line of accelerometer toolbox """
 def toolBoxParser(values,time,acc):
-    time.append(values[0])
-    acc.append(values[4])
+    delay = 5
+
+    time.append(float(values[0])-delay)
+    acc.append(float(values[4]))
