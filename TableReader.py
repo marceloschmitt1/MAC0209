@@ -7,7 +7,7 @@ def csvParser(filename):
     mra = []
     f = open(filename, "r")
     for line in f:
-        temp = []
+        temp = [0]
         values = line.split(',')
         if values[0] == "0":
             del values[0]
