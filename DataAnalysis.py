@@ -94,7 +94,5 @@ for i in range(1, 4):
     t, f = table.csvParser("PhysicsToolboxData/mra" + str(i) + ".csv")
     physicsToolboxDataAccelerated.append([t, f])
 
-print(len(physicsToolboxDataAccelerated))
-
 analyzeMRU(mru, physicsToolboxDataUniform)
 analyzeMRA(mra, physicsToolboxDataAccelerated)
